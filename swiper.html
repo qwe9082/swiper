@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>swiper</title>
+	<link rel="stylesheet" href="./swiper.min.css">
+	<script type="text/javascript" src="./swiper.min.js"></script>
+	<style>
+		.swiper-container {
+			width: 490px;
+			height: 170px;
+		}
+	</style>
+</head>
+<body>
+	<div class="swiper-container">
+		<!---->
+		<div class="swiper-wrapper">
+			<div class="swiper-slide"><img src="../../images/01.jpg" height="170" width="490"></div>
+			<div class="swiper-slide"><img src="../../images/02.jpg" height="170" width="490"></div>
+			<div class="swiper-slide"><img src="../../images/03.jpg" height="170" width="490"></div>
+		</div>
+		<!--分页器-->
+		<div class="swiper-pagination"></div>
+		
+		<!--翻页-->
+		<div class="swiper-button-prev"></div>
+		<div class="swiper-button-next"></div>
+
+		<!--滚动条-->
+		<div class="swiper-scrollbar"></div>
+	</div>
+	<script>
+		var mySwiper = new Swiper('.swiper-container',{
+			pagination: '.swiper-pagination',
+			nextButton: '.swiper-button-next',
+			prevButton: '.swiper-button-prev',
+			scrollbar : '.swiper-scrollbar',
+			onSlideChangeEnd: function(swiper){
+				swiper.slideNext()
+				console.log(swiper);
+			}
+		})
+	</script>
+</body>
+</html>
