@@ -28,16 +28,28 @@
 	<button id="btn">旋转</button>
 	<script>
 		var mySwiper = new Swiper('.swiper-container',{
-			'pagination' : '.swiper-pagination',
-			'prevButton' : '.swiper-button-prev',
-			'nextButton' : '.swiper-button-next',
-			'scrollbar' : '.swiper-scrollbar',
+			'initialSlide': 1, //初始化索引
+			'direction' : 'vertical', //轮播方向
+			'speed' : 300, //滑动速度
+			'autoplay': 2000, //自动播放速度
+			'autoplayDisableOnInteraction' : true, //用户操作之后是否停止自动播放
+			'loop' : true, //是否循环
+			'pagination' : '.swiper-pagination', //分页器
+			'paginationType' : 'custom' , //分页器类型(bullets圆点  fraction分式  progress进度条  curtom自定义)
+			paginationCustomRender:function(swiper,current,total){
+				return current + ' of ' + total;
+			},
+			'paginationClickable': true, //分页器可否点击
+			'paginationHide': false, //分页器是否隐藏
+			'prevButton' : '.swiper-button-prev', //上一页按钮
+			'nextButton' : '.swiper-button-next', //下一页按钮
+			'scrollbar' : '.swiper-scrollbar', //滚动条
 		})
 
 		var btn = document.getElementById('btn');
-		var slide = document.getElementsByClassName('.swiper-slide-active').querySelector('img');
+		var slide = document.getElementsByClassName('swiper-slide-active')[0].querySelector('img');
 		btn.onclick = function(){
-			slide.style.transform = 'ratate(90deg)';
+			slide.style.transform = 'rotate(90deg)';
 		}
 	</script>
 </body>
