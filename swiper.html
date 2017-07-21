@@ -28,22 +28,88 @@
 	<button id="btn">旋转</button>
 	<script>
 		var mySwiper = new Swiper('.swiper-container',{
+			//base基础设置
 			'initialSlide': 1, //初始化索引
-			'direction' : 'vertical', //轮播方向
+			'direction' : 'horizontal', //轮播方向
 			'speed' : 300, //滑动速度
 			'autoplay': 2000, //自动播放速度
 			'autoplayDisableOnInteraction' : true, //用户操作之后是否停止自动播放
+			'slidesPerview' : 'auto',
+
+			//loop
 			'loop' : true, //是否循环
+			'loopAdditionalSlides': 1,//前后复制slide的个数  默认0代表前后各一个  个数不能大于原总数个数
+			'loopedSlides' : 3,//需要slide的个数
+
+			//pagination分页选项
 			'pagination' : '.swiper-pagination', //分页器
-			'paginationType' : 'custom' , //分页器类型(bullets圆点  fraction分式  progress进度条  curtom自定义)
-			paginationCustomRender:function(swiper,current,total){
+			'paginationType' : 'bullets' , //分页器类型(bullets圆点  fraction分式  progress进度条  curtom自定义)
+			paginationCustomRender: function(swiper,current,total){
 				return current + ' of ' + total;
+			},
+			paginationBulletRender: function(swiper,index,className){
+				return '<span class="' + className + '">' + (index + 1) + '</span>';
+			},
+			paginationFractionRender: function(swiper,currentClassName,totalClassName){
+				return '<span class="' + currentClassName + '"></span>' +
+			             ' of ' +
+			             '<span class="' + totalClassName + '"></span>';
+			},
+			paginationProgressRender: function(swiper,progressClass){
+				return '<span class="'+progressClass+'"></span>'
 			},
 			'paginationClickable': true, //分页器可否点击
 			'paginationHide': false, //分页器是否隐藏
+			'paginationElement': 'li',//分页器标签类型，默认span
+
+			//button按钮
 			'prevButton' : '.swiper-button-prev', //上一页按钮
 			'nextButton' : '.swiper-button-next', //下一页按钮
-			'scrollbar' : '.swiper-scrollbar', //滚动条
+
+			//滚动条
+			'scrollbar' : '.swiper-scrollbar', //滚动条容器
+			'scrollbarHide': true, //滚动条是否自动隐藏
+			'scrollbarDraggable': true, //设置滚动条是否可以拖动
+			'scrollbarSnapOnRelease': true,//释放滚动条时是否自动贴合
+
+			//effect切换效果
+			'effect': 'slide',//切换效果(slide默认位移切换  fade淡入   cube方块   coverflow3d流   flip3d翻转)
+
+			//click点击
+			'slideToClickedSlide': true, //点击的图片会居中
+			'preventClicks': true,//阻止默认事件
+			'preventClicksPropagation': true,//拖动时阻止click事件
+
+			//touch触摸
+			'touchRatio': 0.5,//触摸距离与slide滑动距离的比例  值越小越难以拖动
+			'simulateTouch': true,//是否支持鼠标点击拖动
+
+			//callback回调函数
+			onInit: function(swiper){
+				alert('初始化完成了！');
+			},   //初始化完成后执行
+			onTouchStart: function(swiper,event){
+				alert('触摸事件触发了');
+			},//触摸到swiper时执行
+			onTouchMove: function(swiper,event){
+				alert('开始滑动了');
+			},//触摸到swiper并滑动时执行
+			onTouchEnd: function(swiper,event){
+				alert('滑动结束');
+			},//释放swiper时触发
+			onSlideChangeStart: function(swiper){
+				alert(swpiper.activeIndex);//过渡后的slide索引值
+			},//当前slide过渡到下一个slide时触发
+			onslideChangeEnd: function(swiper){
+				alert(swiper.activeIndex)
+			},//slide过渡结束后执行
+
+
+			//properties 属性
+
+			//methods
+
+			//更多属性见官网api文档   http://www.swiper.com.cn/api/index.html
 		})
 
 		var btn = document.getElementById('btn');
@@ -51,6 +117,16 @@
 		btn.onclick = function(){
 			slide.style.transform = 'rotate(90deg)';
 		}
+	// 	var name = "The Window";
+	// 　　var object = {
+	// 　　　　name : "My Object",
+	// 　　　　getNameFunc : function(){
+	// 　　　　　　return function(){
+	// 　　　　　　　　return this.name;
+	// 　　　　　　};
+	// 　　　　}
+	// 　　};
+	// 　　alert(object.getNameFunc()());
 	</script>
 </body>
 </html>
